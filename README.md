@@ -23,9 +23,10 @@
 <summary>更新日志</summary>
 
 - 2023-11-27:
-	- 学习api请求：GET请求，具体更新在tools/request
-	- 更新前端项目
-		- 未完成：
+	- 已完成
+		- 学习api请求：GET请求，具体更新在tools/request
+		- 更新前端项目
+	- 未完成：
 		- [X]POST请求
 
 </details>
