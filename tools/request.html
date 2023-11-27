@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple GET Request Example</title>
+<script>
+function sendRequest() {
+    // 获取输入框的值
+    var userInput = document.getElementById('inputText').value;
+
+    // 这里替换成你的 API 端点
+    var apiEndpoint = 'https://apis.tianapi.com/tianqi/index';
+
+    // 将用户输入附加到 URL 上作为查询参数
+    var urlWithParams = apiEndpoint + '?key=0e2c14f1c9ab22c92478155dfdeccb21&city=' + encodeURIComponent(userInput) + '&type=1';
+
+    // 使用 fetch 发起 GET 请求
+    fetch(urlWithParams, {
+        method: 'GET', // 指定请求方法为 GET
+        headers: {
+            // 如有需要，可以增加更多的请求头
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        // 注意 GET 请求不应该有 body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json(); // 或者 response.text()，如果返回的是非 JSON 数据
+    })
+    .then(data => {
+        console.log(data); // 在控制台打印返回的数据
+        // 这里可以添加一些处理返回数据的逻辑
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+</script>
+</head>
+<body>
+
+<!-- 输入框 -->
+<input type="text" id="inputText" placeholder="Enter some text">
+
+<!-- 按钮 -->
+<button onclick="sendRequest()">Send Request</button>
+
+</body>
+</html>
