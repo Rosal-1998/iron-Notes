@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">铁甲小记 - IronNotes</h3>
       </div>
 
       <el-form-item prop="username">
@@ -255,15 +255,18 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background-color: #2d3a4b;
   overflow: hidden;
+  background-image: url(../../images/bg.png);
 
   .login-form {
+    background-color:rgb(241, 243, 244);
+    opacity: 70%;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    padding: 0px 35px 0;
+    margin: 160px auto;
     overflow: hidden;
   }
 
@@ -288,11 +291,12 @@ $light_gray:#eee;
   }
 
   .title-container {
+    
     position: relative;
 
     .title {
       font-size: 26px;
-      color: $light_gray;
+      color: black;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
