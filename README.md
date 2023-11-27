@@ -1,9 +1,24 @@
 # iron-Notes
-铁甲小记 
+铁甲小记【2023-
 
 相关地址：
 
-vscode：https://code.visualstudio.com/
+1. 文档：
+   1. [markdown文档](https://www.runoob.com/markdown/md-tutorial.html)
+   2. [前端项目](https://github.com/PanJiaChen/vue-element-admin/blob/master/README.zh-CN.md)
+2. 各类软件、环境下载地址：
+   1. [vscode](https://code.visualstudio.com/)
 
-前端项目：https://github.com/Armour/vue-typescript-admin-template/blob/master/README-zh.md
+<details>
+  <summary>更新日志</summary>
+    <p>
+        2023-11-27:
+        1. 学习api请求：GET请求，具体更新在tools/request
+        2. 更新前端项目
+        未完成:
+        [X] POST
+    </p>
+</details>
+
+
 
