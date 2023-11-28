@@ -19,7 +19,13 @@
 		- 学习api请求：GET请求，具体更新在tools/request
 		- 更新前端项目
 	- 未完成：
-		- [X]POST请求
+		- [X]POST请求【2023-11-28】
+- 2023-11-28:
+	- 已完成
+		- 学习api请求：POST请求，具体更新在tools/request
+		- 把js和python的脚本都写成可运行的简单程序
+	- 未完成：
+		- 将js文件再简化
 
 </details>
 

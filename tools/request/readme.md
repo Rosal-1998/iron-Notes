@@ -8,8 +8,10 @@ request模块：
 
 2. javascript的请求
    1. html输入，按钮事件
-   2. 添加dom事件
+   2. 添加dom事件，读取元素信息、修改元素信息。
    3. 打印
    4. 使用F12查看请求
-
+5. alert用法
+   
 3. Python的请求
+

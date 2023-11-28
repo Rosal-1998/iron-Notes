@@ -1,5 +1,5 @@
 <!-- 使用js写https请求 -->
-
+<!-- js控制dom元素：https://blog.51cto.com/u_710020/5969571 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,56 +7,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple GET Request Example</title>
+    <title>Simple Request Example</title>
     <script>
         function sendRequestPOST() {
+            const apiUrl = 'https://apis.tianapi.com/tianqi/index';
+            const apiKey = '0e2c14f1c9ab22c92478155dfdeccb21';
             var userInput = document.getElementById('inputText').value;
-
-            // 目标URL
-            const url = 'https://apis.tianapi.com/tianqi/index';
-
-            const data = {
-                key: '0e2c14f1c9ab22c92478155dfdeccb21',
-                city: userInput
+            if(!userInput){
+                alert('输入城市不得为空！')
             }
+            // 构建请求参数
+            const formData = new FormData();
+            formData.append('key', apiKey);
+            formData.append('city', userInput)
 
-            fetch(url, {
+            // 发起POST请求
+            fetch(apiUrl, {
                 method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-
+                body: formData,
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.json(); // 或者 response.text()，如果返回的是非 JSON 数据
-                })
+                .then(response => response.json())
                 .then(data => {
-                    console.log(data); // 在控制台打印返回的数据
-                    // 这里可以添加一些处理返回数据的逻辑
-                    document.getElementById('weather').textContent = JSON.stringify(data.result.weather);
-
-
+                    // 处理返回的数据
+                    console.log(data);
+                    const htp = 'Post'
+                    QueryWeater(htp, data)
                 })
                 .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
+                    // 处理请求错误
+                    console.error('Error:', error);
                 });
-
         }
-
         function sendRequestGET() {
             // 获取输入框的值
             var userInput = document.getElementById('inputText').value;
-            console.log(userInput)
+            if(!userInput){
+                alert('输入城市不得为空！')
+            }
+            // console.log(userInput)
             // 这里替换成你的 API 端点
             var apiEndpoint = 'https://apis.tianapi.com/tianqi/index';
             // 将用户输入附加到 URL 上作为查询参数
-            var urlWithParams = apiEndpoint + '?key=0e2c14f1c9ab22c92478155dfdeccb21&city=' 
-            + encodeURIComponent(userInput) + 
-            '&type=1';
+            var urlWithParams = apiEndpoint + '?key=0e2c14f1c9ab22c92478155dfdeccb21&city='
+                + encodeURIComponent(userInput) +
+                '&type=1';
             // 使用 fetch 发起 GET 请求
             fetch(urlWithParams, {
                 method: 'GET', // 指定请求方法为 GET
@@ -75,37 +69,61 @@
                 .then(data => {
                     console.log(data); // 在控制台打印返回的数据
                     // 这里可以添加一些处理返回数据的逻辑
-                    document.getElementById('weather').textContent = JSON.stringify(data.result.highest);
+                    const htp = 'Get'
+                    QueryWeater(htp, data)
 
-
+                    // document.getElementById('weather').textContent = JSON.stringify(data.result.highest);
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
                 });
         }
-        function click2() {
-            console.log('你点击我了！')
+
+        function QueryWeater(htp, data) {
+            if (htp == 'Get') {
+                console.log('Get')
+                var code = data.result
+
+            } else {
+                console.log('Post')
+                var code = data.result.list[0]
+            }
+            document.getElementById('weather').style.display = 'block'
+
+            document.getElementById('weather').textContent =
+                '城市：' + data.result.area
+                + '\n' + '天气：' + code.weather
+                + '\n' + '实时气温：' + code.real
+                + '\n' + '最高气温：' + code.highest
+                + '\n' + '最低气温：' + code.lowest
+                + '\n' + '天气小助手：' + code.tips
+
         }
+
     </script>
 </head>
 
 <body>
     <style>
         #weather {
+            width: 400px;
             height: 200px;
+            background-color: red;
+            border-radius: 20px;
+            padding: 20px;
         }
     </style>
     <!-- 输入框 -->
     <input type="text" id="inputText" placeholder="输入你要查询的城市">
 
     <!-- 按钮 -->
-    <button onclick="sendRequestGET()">使用GET协议查询天气</button>
-    <!-- <button onclick="sendRequestPOST()">使用POST协议查询天气</button> -->
+    <button onclick="sendRequestGET('get')">使用GET协议查询天气</button>
+    <button onclick="sendRequestPOST('post')">使用POST协议查询天气</button>
 
-    <button onclick="click2()">点我</button>
+    <div id="weather" style="display: none; white-space: pre-wrap;">
+        <p>
 
-    <div id="weather">
-
+        </p>
     </div>
 
 </body>
