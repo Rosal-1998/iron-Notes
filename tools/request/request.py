@@ -6,11 +6,14 @@ import json
 def GET(city):
     result = requests.get(
         'https://apis.tianapi.com/tianqi/index?key=0e2c14f1c9ab22c92478155dfdeccb21&city=' + city + '&type=1')
+    print('---------------')
+    print(result)
+    print('---------------')
     print(result.text)
     # 解析python request之后的返回结果的json格式
     resultJson = result.json()
-    msg = resultJson.get('msg')
-    print(msg)
+    
+    print('---最高温度---',resultJson.get('result').get('highest'))
     return result
 
 
@@ -32,8 +35,8 @@ def GET(city):
 #     return result
 
 
-# choice = input('请选择你想要使用的协议：1.GET 2.POST')
-choice = '2'
+choice = input('请选择你想要使用的协议：1.GET 2.POST')
+# choice = '2'
 if choice == '1':
     print('----已选择GET协议！----')
     city = input("请输入需要查询的天气: ")

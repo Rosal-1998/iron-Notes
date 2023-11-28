@@ -50,10 +50,13 @@
         function sendRequestGET() {
             // 获取输入框的值
             var userInput = document.getElementById('inputText').value;
+            console.log(userInput)
             // 这里替换成你的 API 端点
             var apiEndpoint = 'https://apis.tianapi.com/tianqi/index';
             // 将用户输入附加到 URL 上作为查询参数
-            var urlWithParams = apiEndpoint + '?key=0e2c14f1c9ab22c92478155dfdeccb21&city=' + encodeURIComponent(userInput) + '&type=1';
+            var urlWithParams = apiEndpoint + '?key=0e2c14f1c9ab22c92478155dfdeccb21&city=' 
+            + encodeURIComponent(userInput) + 
+            '&type=1';
             // 使用 fetch 发起 GET 请求
             fetch(urlWithParams, {
                 method: 'GET', // 指定请求方法为 GET
@@ -72,13 +75,16 @@
                 .then(data => {
                     console.log(data); // 在控制台打印返回的数据
                     // 这里可以添加一些处理返回数据的逻辑
-                    document.getElementById('weather').textContent = JSON.stringify(data.result.weather);
+                    document.getElementById('weather').textContent = JSON.stringify(data.result.highest);
 
 
                 })
                 .catch(error => {
                     console.error('There has been a problem with your fetch operation:', error);
                 });
+        }
+        function click2() {
+            console.log('你点击我了！')
         }
     </script>
 </head>
@@ -95,6 +101,8 @@
     <!-- 按钮 -->
     <button onclick="sendRequestGET()">使用GET协议查询天气</button>
     <!-- <button onclick="sendRequestPOST()">使用POST协议查询天气</button> -->
+
+    <button onclick="click2()">点我</button>
 
     <div id="weather">
 
