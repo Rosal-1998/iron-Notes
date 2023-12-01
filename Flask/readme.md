@@ -11,3 +11,14 @@ set FLASK_APP=iron-notes_flask
 flask run
 ```
 
+服务器记录：
+
+查询：Get请求。
+
+与数据库有交互：Post请求。
+
+安装库：
+
+```powershel
+pip install mysql-connector-python
+```
