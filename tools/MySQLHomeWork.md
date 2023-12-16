@@ -14,7 +14,6 @@
       - [x]   [游戏玩法分析 I](https://leetcode.cn/problems/game-play-analysis-i/)【MIN()+Group by】
       - [x]   [员工奖金](https://leetcode.cn/problems/employee-bonus/)【左连接】
       - [x]  [寻找用户推荐人](https://leetcode.cn/problems/find-customer-referee/)【NULL】
-
       - [x]   [超过5名学生的课](https://leetcode.cn/problems/classes-more-than-5-students/)【GROUP BY+HAVING】
       - [x]  [销售员](https://leetcode.cn/problems/sales-person/) 【嵌套查询】
       - [x]  [判断三角形](https://leetcode.cn/problems/triangle-judgement/) 【IF的用法】
