@@ -27,3 +27,7 @@
 - [x]   [有趣的电影](https://leetcode.cn/problems/not-boring-movies/) 【order by + 判断】
 - [x] [合作过至少三次的演员和导演](https://leetcode.cn/problems/actors-and-directors-who-cooperated-at-least-three-times/)  【GROUP BY + COUNT】
 
+【2023-12-17】
+- [x]    [每位教师所教授的科目种类的数量](https://leetcode.cn/problems/number-of-unique-subjects-taught-by-each-teacher/) 
+- [x]     [可回收且低脂的产品](https://leetcode.cn/problems/recyclable-and-low-fat-products/) 
+
