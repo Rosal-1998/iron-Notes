@@ -110,8 +110,27 @@ def LearnRecord(opreation):
         print('查看学习记录【Get】')
         learnrecordpersonid = request.args.get('userId')
         cursor.execute('SELECT * FROM learnrecord WHERE learnrecordpersonid = %s', (learnrecordpersonid,))
-        values = cursor.fetchall()
+        rows = cursor.fetchall()
+        values = [{'learnrecordid': row[0], 'learnrecordtheme': row[1], 'learnrecordcontent': row[2],'learnrecordpersonid':row[3]} for row in rows]
         print(values)
-        res = 'show'
+        res = values
     return res
     # return
+
+
+# elif opreation == 'showInfo':
+#         print('查看学习记录【Get】')
+#         learnrecordpersonid = request.args.get('userId')
+#     # 修改 SQL 查询，为每个字段指定别名，包括表名作为别名的一部分
+#         cursor.execute("""
+#             SELECT 
+#                 learnrecord.learnrecordid AS 'learnrecordid', 
+#                 learnrecord.learnrecordtheme AS 'learnrecordtheme', 
+#                 learnrecord.learnrecordcontent AS 'learnrecordcontent',
+#                 learnrecord.learnrecordpersonid AS 'learnrecordpersonid'
+#             FROM learnrecord 
+#             WHERE learnrecord.learnrecordpersonid = %s
+#         """, (learnrecordpersonid,))
+#         values = cursor.fetchall()
+#         print(values)
+#         res = values
