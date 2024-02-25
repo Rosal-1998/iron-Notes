@@ -76,61 +76,23 @@ def User(opreation):
 
 @app.route('/LearnRecord/<opreation>', methods=['GET', 'POST'])
 def LearnRecord(opreation):
-    if opreation == 'check':
-        print('检查是否为已经注册过的用户/检测用户名是否可用【Get】')
-        userId = request.args.get('userId')
-        cursor.execute('SELECT * FROM user WHERE userId = %s', (userId,))
-        values = cursor.fetchall()
-        if values == [] :
-            res = 'available'
-        else:
-            res = 'unAvailable'
-    elif opreation == 'regist':
-        print('注册新用户【Post】')
-        # cursor.execute('SELECT count(name) FROM user')
-        count = int(cursor.fetchall()[0][0]) + 1
-        print(count)
-        wxid = request.args.get('wxid')
-        name = '小土豆'+ str(count)
-        avatar = request.args.get('avatar')
-        flower = request.args.get('flower')
-        # cursor.execute('INSERT INTO user (wxid, name, avatar, flower) values (%s, %s, %s, %s)', (wxid, name, avatar, flower))
-        # conn.commit()
-        res = name # 将初始用户名返回至小程序端缓存
-    elif opreation == 'changeInfo':
-        print('修改用户信息')
-        wxid = request.args.get('wxid')
-        name = request.args.get('name')
-        motto = request.args.get('motto')
-        # cursor.execute('UPDATE user SET name = %s,motto = %s WHERE wxid = %s', (name, motto, wxid))
-        # conn.commit()
-        print(wxid, name, motto)
-        res = 'Changed'
+    if opreation == 'add':
+        print('添加学习记录【GET】')
+        learnrecordid = request.args.get('time')
+        learnrecordcontent = request.args.get('content')
+        learnrecordpersonid = request.args.get('userId')
+        cursor.execute('INSERT INTO learnrecords (learnrecordid, learnrecordcontent, learnrecordpersonid) values (%s, %s, %s)', (learnrecordid, learnrecordcontent, learnrecordpersonid))
+        conn.commit()
+        res = 'addSuccess'
     elif opreation == 'showInfo':
         print('查看学习记录【Get】')
         learnrecordpersonid = request.args.get('userId')
-        cursor.execute('SELECT * FROM learnrecord WHERE learnrecordpersonid = %s', (learnrecordpersonid,))
+        cursor.execute('SELECT * FROM learnrecords WHERE learnrecordpersonid = %s', (learnrecordpersonid,))
         rows = cursor.fetchall()
-        values = [{'learnrecordid': row[0], 'learnrecordtheme': row[1], 'learnrecordcontent': row[2],'learnrecordpersonid':row[3]} for row in rows]
+        values = [{'learnrecordid': row[0], 'learnrecordcontent': row[1],'learnrecordpersonid':row[2]} for row in rows]
         print(values)
         res = values
     return res
     # return
 
 
-# elif opreation == 'showInfo':
-#         print('查看学习记录【Get】')
-#         learnrecordpersonid = request.args.get('userId')
-#     # 修改 SQL 查询，为每个字段指定别名，包括表名作为别名的一部分
-#         cursor.execute("""
-#             SELECT 
-#                 learnrecord.learnrecordid AS 'learnrecordid', 
-#                 learnrecord.learnrecordtheme AS 'learnrecordtheme', 
-#                 learnrecord.learnrecordcontent AS 'learnrecordcontent',
-#                 learnrecord.learnrecordpersonid AS 'learnrecordpersonid'
-#             FROM learnrecord 
-#             WHERE learnrecord.learnrecordpersonid = %s
-#         """, (learnrecordpersonid,))
-#         values = cursor.fetchall()
-#         print(values)
-#         res = values
