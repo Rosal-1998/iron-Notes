@@ -5,6 +5,10 @@ from flask import request
 from flask_cors import CORS
 # from flask.views import MethodView
 
+from datetime import datetime
+
+
+
 app = Flask(__name__)
 CORS(app, resources=r'/*')
 import mysql.connector
@@ -74,6 +78,22 @@ def User(opreation):
     # return
 
 
+
+def updateContributions(learnrecordid,learnrecordpersonid):
+    date_formatted = datetime.fromtimestamp(int(learnrecordid)).strftime('%y%m%d')
+    cursor.execute('SELECT * FROM contributions WHERE personid = %s and date = %s', (learnrecordpersonid,date_formatted))
+    values = cursor.fetchall()
+    print('【values】:',values)
+    if values == []:
+        # 添加contributions
+        cursor.execute('INSERT INTO contributions (personid, date, times) values (%s, %s, %s)', (learnrecordpersonid, date_formatted, 0))
+        conn.commit()
+    else:
+        # 修改contributions
+        cursor.execute('UPDATE contributions SET times = times + 1 WHERE personid =%s AND date = %s ', (learnrecordpersonid, date_formatted))
+        conn.commit()
+    return 'UpdateContributions'
+
 @app.route('/LearnRecord/<opreation>', methods=['GET', 'POST'])
 def LearnRecord(opreation):
     if opreation == 'add':
@@ -83,7 +103,14 @@ def LearnRecord(opreation):
         learnrecordpersonid = request.args.get('userId')
         cursor.execute('INSERT INTO learnrecords (learnrecordid, learnrecordcontent, learnrecordpersonid) values (%s, %s, %s)', (learnrecordid, learnrecordcontent, learnrecordpersonid))
         conn.commit()
+        updateContributions(learnrecordid,learnrecordpersonid)
         res = 'addSuccess'
+    elif opreation == 'delete':
+        print('删除学习记录【Get】')
+        learnrecordid = request.args.get('learnrecordid')
+        cursor.execute('DELETE FROM learnrecords WHERE learnrecordid = %s', (learnrecordid,))
+        conn.commit()
+        res = 'deleteSuccess'
     elif opreation == 'showInfo':
         print('查看学习记录【Get】')
         learnrecordpersonid = request.args.get('userId')
