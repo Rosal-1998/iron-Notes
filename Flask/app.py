@@ -27,6 +27,24 @@ def show_user_profile(username, post_id):
     # show the user profile for that user
     return f'User {escape(username)} {post_id}'
 
+# 更新Contributions
+def updateContributions(learnrecordid,learnrecordpersonid):
+    # 格式：2024-02-26 --> 240226
+    date_formatted = datetime.fromtimestamp(int(learnrecordid)).strftime('%y%m%d')
+    cursor.execute('SELECT * FROM contributions WHERE personid = %s and date = %s', (learnrecordpersonid,date_formatted))
+    values = cursor.fetchall()
+    if values == []:
+        # 添加contributions
+        cursor.execute('INSERT INTO contributions (personid, date, times) values (%s, %s, %s)', (learnrecordpersonid, date_formatted, 1))
+        conn.commit()
+    else:
+        # 修改contributions
+        cursor.execute('UPDATE contributions SET times = times + 1 WHERE personid =%s AND date = %s ', (learnrecordpersonid, date_formatted))
+        conn.commit()
+    return 'UpdateContributions'
+
+
+
 
 @app.route('/User/<opreation>', methods=['GET', 'POST'])
 def User(opreation):
@@ -79,20 +97,7 @@ def User(opreation):
 
 
 
-def updateContributions(learnrecordid,learnrecordpersonid):
-    date_formatted = datetime.fromtimestamp(int(learnrecordid)).strftime('%y%m%d')
-    cursor.execute('SELECT * FROM contributions WHERE personid = %s and date = %s', (learnrecordpersonid,date_formatted))
-    values = cursor.fetchall()
-    print('【values】:',values)
-    if values == []:
-        # 添加contributions
-        cursor.execute('INSERT INTO contributions (personid, date, times) values (%s, %s, %s)', (learnrecordpersonid, date_formatted, 0))
-        conn.commit()
-    else:
-        # 修改contributions
-        cursor.execute('UPDATE contributions SET times = times + 1 WHERE personid =%s AND date = %s ', (learnrecordpersonid, date_formatted))
-        conn.commit()
-    return 'UpdateContributions'
+
 
 @app.route('/LearnRecord/<opreation>', methods=['GET', 'POST'])
 def LearnRecord(opreation):
@@ -120,6 +125,25 @@ def LearnRecord(opreation):
         print(values)
         res = values
     return res
-    # return
 
+
+@app.route('/Contributions/<opreation>', methods=['GET', 'POST'])
+def Contributions(opreation):
+    if opreation == 'showInfo':
+        print('拉取本月贡献【Get】')
+        personid = request.args.get('userId')
+        date = request.args.get('date')
+        cursor.execute('SELECT * FROM contributions WHERE personid = %s and date Like %s', (personid,date+'%'))
+        rows = cursor.fetchall()
+        values = [{'personid': row[0], 'date': row[1],'times':row[2]} for row in rows]
+        print(values)
+        res = values
+    elif opreation == 'delete':
+        print('删除学习记录【Get】')
+        learnrecordid = request.args.get('learnrecordid')
+        cursor.execute('DELETE FROM learnrecords WHERE learnrecordid = %s', (learnrecordid,))
+        conn.commit()
+        res = 'deleteSuccess'
+        
+    return res
 

@@ -39,7 +39,9 @@
 	- [x] 学习记录的拉取、添加。
 - 2024-02-26:
 	- [x] 学习记录的删除。
-	- [x] 添加contribution模块
+	- [x] 添加contribution模块。
+- 2024-02-27:
+	- [x] 完成contribution模块。
 </details>
 
 <details>
