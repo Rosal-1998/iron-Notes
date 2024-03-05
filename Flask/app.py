@@ -144,6 +144,32 @@ def Contributions(opreation):
         cursor.execute('DELETE FROM learnrecords WHERE learnrecordid = %s', (learnrecordid,))
         conn.commit()
         res = 'deleteSuccess'
-        
     return res
 
+# 知识库模块
+@app.route('/Knowledge/<opreation>', methods=['GET', 'POST'])
+def Knowledge(opreation):
+    if opreation == 'add':
+        print('添加知识库【GET】')
+        userId = request.args.get('userId')
+        knowledgeName = request.args.get('knowledgeName')
+        cursor.execute('INSERT INTO knowledge (knowledgeId,userId, knowledgeName) values (UUID(), %s, %s)', (userId, knowledgeName))
+        conn.commit()
+        res = 'addSuccess'
+    elif opreation == 'showInfo':
+        print('拉取用户知识库【Get】')
+        userId = request.args.get('userId')
+        print('userId',userId)
+        cursor.execute('SELECT * FROM knowledge WHERE userId = %s', (userId,))
+        rows = cursor.fetchall()
+        print(rows)
+        values = [{'userId': row[0], 'knowledgeId': row[1],'knowledgeName':row[2]} for row in rows]
+        print(values)
+        res = values
+    elif opreation == 'delete':
+        print('删除知识库【Get】')
+        learnrecordid = request.args.get('learnrecordid')
+        cursor.execute('DELETE FROM learnrecords WHERE learnrecordid = %s', (learnrecordid,))
+        conn.commit()
+        res = 'deleteSuccess'
+    return res

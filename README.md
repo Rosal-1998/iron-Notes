@@ -42,6 +42,8 @@
 	- [x] 添加contribution模块。
 - 2024-02-27:
 	- [x] 完成contribution模块。
+- 2024-03-04:
+	- [x] 完成知识库的展示、添加。
 </details>
 
 <details>
