@@ -4,10 +4,10 @@ ColPositions_connform.ListSessions<|||>1<|||>0,1,2,3,4,5,6
 ColSort_connform.ListSessions<|||>1<|||>0,0
 CoolBand0Index<|||>3<|||>0
 CoolBand0Break<|||>3<|||>1
-CoolBand0Width<|||>3<|||>818
+CoolBand0Width<|||>3<|||>1530
 CoolBand1Index<|||>3<|||>1
 CoolBand1Break<|||>3<|||>1
-CoolBand1Width<|||>3<|||>818
+CoolBand1Width<|||>3<|||>1530
 MainWinOnMonitor<|||>3<|||>0
 ColWidths_MainForm.ListDatabases<|||>1<|||>150,80,50,50,50,50,50,50,50,50,120
 ColsVisible_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
@@ -39,8 +39,8 @@ ColWidths_UserManagerForm.listUsers<|||>1<|||>96,80
 ColsVisible_UserManagerForm.listUsers<|||>1<|||>0,1
 ColPositions_UserManagerForm.listUsers<|||>1<|||>0,1
 ColSort_UserManagerForm.listUsers<|||>1<|||>0,0
-MainWinMaximized<|||>3<|||>0
-ColWidths_frmTableEditor.listColumns<|||>1<|||>22,152,102,90,60,84,50,128,130,149,100,100
+MainWinMaximized<|||>3<|||>1
+ColWidths_frmTableEditor.listColumns<|||>1<|||>23,152,102,90,60,84,50,128,130,149,100,100
 ColsVisible_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
 ColPositions_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
 ColSort_frmTableEditor.listColumns<|||>1<|||>-1,0
@@ -97,9 +97,9 @@ Servers\X5\SSL_Cert<|||>1<|||>
 Servers\X5\SSL_CA<|||>1<|||>
 Servers\X5\SSL_Cipher<|||>1<|||>
 Servers\X5\ServerVersionFull<|||>1<|||>5.6.26 - MySQL Community Server (GPL)
-Servers\X5\ConnectCount<|||>3<|||>79
+Servers\X5\ConnectCount<|||>3<|||>80
 Servers\X5\ServerVersion<|||>3<|||>50626
-Servers\X5\LastConnect<|||>1<|||>2024-02-23 12:06:00
+Servers\X5\LastConnect<|||>1<|||>2024-03-06 22:40:25
 Servers\X5\lastUsedDB<|||>1<|||>ironnotes
 Servers\X5\RefusedCount<|||>3<|||>3
 Servers\X5\bluewhale|records\Sort<|||>1<|||>1_RecordstudentName|
