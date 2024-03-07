@@ -153,7 +153,8 @@ def Knowledge(opreation):
         print('添加知识库【GET】')
         userId = request.args.get('userId')
         knowledgeName = request.args.get('knowledgeName')
-        cursor.execute('INSERT INTO knowledge (knowledgeId,userId, knowledgeName) values (UUID(), %s, %s)', (userId, knowledgeName))
+        description = request.args.get('description')
+        cursor.execute('INSERT INTO knowledge (knowledgeId,userId, knowledgeName,description) values (UUID(), %s, %s,%s)', (userId, knowledgeName,description))
         conn.commit()
         res = 'addSuccess'
     elif opreation == 'showInfo':
@@ -162,16 +163,23 @@ def Knowledge(opreation):
         cursor.execute('SELECT * FROM knowledge WHERE userId = %s', (userId,))
         rows = cursor.fetchall()
         print(rows)
-        values = [{'userId': row[0], 'knowledgeId': row[1],'knowledgeName':row[2]} for row in rows]
+        values = [{'userId': row[0], 'knowledgeId': row[1],'knowledgeName':row[2],'detail':row[3],'description':row[4]} for row in rows]
         print(values)
         res = values
     elif opreation == 'showDetail':
-        print('知识库详情【Get】')
+        print('拉取知识库详情【Get】')
         knowledgeId = request.args.get('knowledgeId')
         cursor.execute('SELECT * FROM knowledge WHERE knowledgeId = %s', (knowledgeId,))
         rows = cursor.fetchall()
         print(rows)
-        values = [{'userId': row[0], 'knowledgeId': row[1],'knowledgeName':row[2]} for row in rows]
+        values = [{'userId': row[0], 'knowledgeId': row[1],'knowledgeName':row[2],'detail':row[3],'description':row[4]} for row in rows]
         print(values)
         res = values
+    elif opreation == 'updateDetail':
+        print('修改知识库详情【Get】')
+        knowledgeId = request.args.get('knowledgeId')
+        detail = request.args.get('detail')
+        cursor.execute('UPDATE knowledge SET detail = %s WHERE knowledgeId = %s', (detail, knowledgeId))
+        conn.commit()
+        res = 'updateDetailSuccess'
     return res
